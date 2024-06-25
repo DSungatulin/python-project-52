@@ -10,10 +10,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
-from pathlib import Path
-from dotenv import load_dotenv
-import dj_database_url
 import os
+import dj_database_url
+from dotenv import load_dotenv
+from pathlib import Path
 
 
 load_dotenv()
@@ -36,7 +36,7 @@ ALLOWED_HOSTS = [
     'webserver',
     '127.0.0.1',
     'localhost',
-    'python-project-52-1z58.onrender.com',
+    'python-project-52-mhbm.onrender.com',
     ]
 
 
