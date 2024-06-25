@@ -4,9 +4,18 @@ version = "0.1.0"
 description = ""
 authors = ["DSungatulin <sungatulindaniyar@gmail.com>"]
 readme = "README.md"
+packages = [{include = "task_manager"}]
 
 [tool.poetry.dependencies]
 python = "^3.10"
+django = "^5.0.6"
+python-dotenv = "^1.0.1"
+psycopg2-binary = "^2.9.9"
+dj-database-url = "^2.2.0"
+whitenoise = {extras = ["brotil"], version = "^6.7.0"}
+gunicorn = "^22.0.0"
+uvicorn = "^0.30.1"
+
 
 
 [build-system]
