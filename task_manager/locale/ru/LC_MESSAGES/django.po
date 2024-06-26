@@ -1,0 +1,14 @@
+msgid "Album example"
+msgstr "Пример альбома"
+
+msgid "Album"
+msgstr "Альбом"
+
+msgid "Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely."
+msgstr "Краткое и ведущее описание коллекции ниже — ее содержимого, создателя и т.д. Сделайте его коротким и приятным, но не слишком коротким, чтобы люди не пропустили его полностью."
+
+msgid "Back to top"
+msgstr "Наверх"
+
+msgid "Album example is © Bootstrap, but please download and customize it for yourself!"
+msgstr "Пример альбома © Bootstrap, но, пожалуйста, скачайте и настройте его для себя!"
