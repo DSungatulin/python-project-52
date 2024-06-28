@@ -36,7 +36,7 @@ ALLOWED_HOSTS = [
     'webserver',
     '127.0.0.1',
     'localhost',
-    'python-project-52-mhbm.onrender.com',
+    os.getenv('RENDER_EXTERNAL_HOSTNAME'),
     ]
 
 
@@ -118,7 +118,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-
+AUTH_USER_MODEL = "users.User"
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
