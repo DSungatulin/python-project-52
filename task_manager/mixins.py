@@ -6,8 +6,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 
 class AuthenticationMixin(LoginRequiredMixin):
-    '''Check Authentication of current User'''
-
     auth_messages = _('You are not logged in! You need to log in.')
 
     def dispatch(self, request, *args, **kwargs):
@@ -19,19 +17,13 @@ class AuthenticationMixin(LoginRequiredMixin):
 
 
 class AuthorizationMixin(UserPassesTestMixin):
-    '''Authorization Check'''
-
     permission_denied_message = None
     permission_denied_url = None
 
     def test_func(self):
-        '''Check user'''
-
         return self.get_object() == self.request.user
 
 
     def handle_no_permission(self):
-        '''If error permission, we handle this error and redirect to denied url'''
-
         messages.error(self.request, self.permission_denied_message)
         return redirect(self.permission_denied_url)

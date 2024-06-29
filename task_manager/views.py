@@ -8,12 +8,10 @@ from django.utils.translation import gettext_lazy as _
 
 
 def index(request):
-    '''Return Home Page'''
     return render(request, 'home.html')
 
 
 class UserLogInView(SuccessMessageMixin, LoginView):
-    '''Form log in User'''
     form_class = AuthenticationForm
     template_name = 'form.html'
     success_url = reverse_lazy('home')
