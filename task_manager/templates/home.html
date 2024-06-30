@@ -19,7 +19,7 @@
       <hr>
 
       {% if user.is_authenticated %}
-          <a class="btn btn-primary btn-lg" href="#">
+      <a class="btn btn-primary btn-lg" href="{% url 'tasks' %}">
       {% else %}
           <a class="btn btn-primary btn-lg" href="{% url 'login' %}">
       {% endif %}

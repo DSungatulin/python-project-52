@@ -12,7 +12,7 @@ class ListOfStatusesView(ListView):
     model = Status
     template_name = 'statuses/index.html'
     context_object_name = 'statuses'
-    extra_content = {
+    extra_context = {
         'title': _('Statuses'),
     }
 
@@ -37,7 +37,7 @@ class StatusUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     success_message = _('Status successfully changed')
     success_url = reverse_lazy('statuses-detail')
     template_name = 'form.html'
-    extra_content = {
+    extra_context = {
         'title': _("Update Status"),
         'button_text': _("Update"),
     }
@@ -49,7 +49,7 @@ class StatusDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     success_message = _('Status successfully deleted')
     success_url = reverse_lazy('statuses-detail')
     template_name = 'statuses/delete.html'
-    extra_content = {
+    extra_context = {
         'title': _('Delete Status'),
         'button_text': _('Delete'),
     }
