@@ -1,0 +1,42 @@
+[
+    {
+      "model": "users.user",
+      "pk": 1,
+      "fields": {
+        "username": "Little_Mozart",
+        "first_name": "Tomas",
+        "last_name": "Rosicky",
+        "password": "Tom123"
+      }
+    },
+    {
+      "model": "users.user",
+      "pk": 2,
+      "fields": {
+        "username": "Lord_Bendter",
+        "first_name": "Nicklas",
+        "last_name": "Bendtner",
+        "password": "11_seconds"
+      }
+    },
+    {
+      "model": "users.user",
+      "pk": 3,
+      "fields": {
+        "username": "Chambo20",
+        "first_name": "Callum",
+        "last_name": "Chambers",
+        "password": "Callum20"
+      }
+    },
+    {
+		"model": "users.user",
+		"pk": 4,
+		"fields": {
+		  "username": "AOCH",
+		  "first_name": "Alex",
+		  "last_name": "Oxlade-Chamberlain",
+		  "password": "Im_the_only_one_here_Chambo"
+		}
+	}
+  ]

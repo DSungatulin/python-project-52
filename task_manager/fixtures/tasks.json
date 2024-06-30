@@ -1,0 +1,41 @@
+[
+    {
+      "model": "tasks.task",
+      "pk": 1,
+      "fields": {
+        "name": "Eat",
+        "body": "Yummy",
+        "author": 1,
+        "executor": 3,
+        "status": 1,
+        "created_at": "2024-06-16T16:27:41.729Z",
+        "labels": []
+      }
+    },
+    {
+      "model": "tasks.task",
+      "pk": 2,
+      "fields": {
+        "name": "Sleep",
+        "body": "Zzzzz",
+        "author": 1,
+        "executor": 1,
+        "status": 1,
+        "created_at": "2024-06-16T09:22:23.443Z",
+        "labels": [1]
+      }
+    },
+    {
+      "model": "tasks.task",
+      "pk": 3,
+      "fields": {
+        "name": "Repeat",
+        "body": "Again",
+        "author": 3,
+        "executor": 1,
+        "status": 2,
+        "created_at": "2024-06-17T12:41:30.416Z",
+        "labels": [1, 2]
+      }
+    }
+  ]

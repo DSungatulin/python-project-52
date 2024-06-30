@@ -1,0 +1,18 @@
+{
+    "create": {
+      "valid": {
+        "first_name": "Leo",
+        "last_name": "Messi",
+        "username": "The_GOAT",
+        "password1": "qwerty12345",
+        "password2": "qwerty12345"
+      }
+    },
+    "update": {
+        "first_name": "Mario",
+        "last_name": "Balotelli",
+        "username": "Best_striker",
+        "password": "Why_always_me",
+        "password2": "Why_always_me"
+      }
+  }
