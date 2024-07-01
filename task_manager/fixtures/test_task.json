@@ -1,18 +1,18 @@
 {
-    "create": {
-      "valid": {
-        "name": "Cookies",
-        "body": "The time has come",
-        "executor": 2,
-        "status": 1,
-        "labels": [1]
-      }
-    },
-    "update": {
-        "name": "Sleep",
-        "body": "",
-        "executor": 2,
-        "status": 2,
-        "labels": [1,2]
-      }
+  "create": {
+    "valid": {
+      "name": "Cookies",
+      "description": "The time has come",
+      "executor": 2,
+      "status": 1,
+      "labels": [1]
+    }
+  },
+  "update": {
+    "name": "Sleep",
+    "description": "",
+    "executor": 2,
+    "status": 2,
+    "labels": [1, 2]
   }
+}
