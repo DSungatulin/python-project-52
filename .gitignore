@@ -6,3 +6,5 @@ dist/
 .env
 db.sqlite3
 .vscode
+.coverage
+coverage.xml
