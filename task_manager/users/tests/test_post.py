@@ -1,53 +1,106 @@
+import unittest
+from django.test import TestCase
+from django.test import Client
 from django.urls import reverse_lazy
-from .testcase import UserTestCase
-from task_manager.users.models import User
+from ..models import User
+from django.contrib.messages import get_messages
+
+# Create your tests here.
 
 
-class TestUserCreate(UserTestCase):
-    def test_create_valid_user(self):
-        user_data = self.test_user['create']['valid'].copy()
-        response = self.client.post(
-            reverse_lazy('users-create'),
-            data=user_data
+class MyTestSuite(unittest.TestSuite):
+    def __init__(self):
+        super(MyTestSuite, self).__init__()
+        self.addTest(SetUpTestCase('test_set_up'))
+        self.addTest(UsersListTest('users_list_test'))
+        self.addTest(UpdateUserTest('update_user_test_success'))
+        self.addTest(DeleteUserTest('delete_user_test_success'))
+
+
+class SetUpTestCase(TestCase):
+    def setUp(self):
+        self.user = User.objects.create(
+            first_name='Ivan', last_name='Ivanov',
+            username='Sample'
+        )
+        self.user.set_password('797c5f34e00145b')
+        self.user.save()
+
+        self.client.login(
+            username='Sample', password='797c5f34e00145b',
         )
 
+
+class UsersListTest(TestCase):
+    def test_index(self):
+        response = self.client.get('/users/')
+        self.assertEqual(response.status_code, 200)
+
+    def test_create_user(self):
+        c = Client()
+        response = c.post('/users/create/', {
+            'first_name': 'Semyon',
+            'last_name': 'Semyonov',
+            'username': 'Sema123',
+            'password1': 'b6e5359809ec5953837df0ba346a26fd',
+            'password2': 'b6e5359809ec5953837df0ba346a26fd',
+        })
         self.assertEqual(response.status_code, 302)
-        self.assertRedirects(response, reverse_lazy('login'))
 
-        self.assertEqual(User.objects.count(), self.count + 1)
-        self.assertEqual(
-            User.objects.last().username,
-            user_data['username']
-        )
+    def test_login_user(self):
+        c = Client()
+        response = c.post('/login/', {
+            'username': 'Sema123',
+            'password': 'b6e5359809ec5953837df0ba346a26fd',
+        })
+        self.assertEqual(response.status_code, 200)
 
 
-class TestUpdateUser(UserTestCase):
-    def test_update_user(self):
-        self.client.force_login(self.user2)
-
-        user_data = self.test_user['update'].copy()
+class UpdateUserTest(SetUpTestCase):
+    def test_user_update_success(self):
         response = self.client.post(
-            reverse_lazy('user-update', kwargs={'pk': self.user2.pk}),
-            data=user_data
+            reverse_lazy('user-update', kwargs={'pk': self.user.pk}),
+            {'first_name': 'Ivan', 'last_name': 'Ivanov',
+             'username': 'Sample_for_docs', 'password1': '797c5f34e00145b',
+             'password2': '797c5f34e00145b'}
         )
-
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse_lazy('users-detail'))
+        messages = list(get_messages(response.wsgi_request))
+        self.assertEqual(len(messages), 1)
+        self.assertIn(str(messages[0]), [
+            'User is successfully updated',
+            'Пользователь успешно изменен',
+        ])
 
-        self.assertEqual(User.objects.count(), self.count)
-        self.assertEqual(
-            User.objects.get(id=self.user2.id).first_name,
-            user_data['first_name']
+
+class DeleteUserTest(TestCase):
+    def setUp(self):
+        self.user = User.objects.create(
+            first_name='John', last_name='Wick',
+            username='DJovanovich'
+        )
+        self.user.set_password('Ditya_Belarusi')
+        self.user.save()
+
+        self.client.login(
+            username='DJovanovich', password='Ditya_Belarusi',
         )
 
-
-class TestDeleteUser(UserTestCase):
-    def test_delete_user(self):
-        self.client.force_login(self.user3)
+    def test_user_delete_success(self):
         response = self.client.post(
-            reverse_lazy('user-delete', kwargs={'pk': 3})
+            reverse_lazy('user-delete', kwargs={'pk': self.user.pk}),
         )
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse_lazy('users-detail'))
+        messages = list(get_messages(response.wsgi_request))
+        self.assertEqual(len(messages), 1)
+        self.assertIn(str(messages[0]), [
+            'User successfully deleted',
+            'Пользователь успешно удален',
+        ])
 
-        self.assertEqual(User.objects.count(), self.count - 1)
+
+if __name__ == '__main__':
+    runner = unittest.TextTestRunner()
+    runner.run(MyTestSuite())

@@ -19,6 +19,9 @@ translate:
 collectstatic:
 	python manage.py collectstatic --no-input
 
+lint:
+	poetry run flake8
+
 start:
 	python -m gunicorn task_manager.asgi:application -k uvicorn.workers.UvicornWorker
 
