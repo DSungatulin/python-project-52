@@ -162,7 +162,7 @@ msgstr "Только свои задачи"
 
 #: task_manager/tasks/models.py:12
 msgid "Description"
-msgstr ""
+msgstr "Описание"
 
 #: task_manager/tasks/models.py:14 task_manager/templates/tasks/index.html:26
 #: task_manager/templates/tasks/task_details.html:20
