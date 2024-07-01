@@ -7,6 +7,7 @@ from django.contrib.messages import get_messages
 
 # Create your tests here.
 
+
 class MyTestSuite(unittest.TestSuite):
     def __init__(self):
         super(MyTestSuite, self).__init__()
@@ -56,7 +57,7 @@ class UsersListTest(TestCase):
 
 
 class UpdateUserTest(SetUpTestCase):
-     def test_user_update_success(self):
+    def test_user_update_success(self):
         response = self.client.post(
             reverse_lazy('user-update', kwargs={'pk': self.user.pk}),
             {'first_name': 'Ivan', 'last_name': 'Ivanov',

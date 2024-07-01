@@ -24,7 +24,6 @@ class AuthorizationMixin(UserPassesTestMixin):
     def test_func(self):
         return self.get_object() == self.request.user
 
-
     def handle_no_permission(self):
         messages.error(self.request, self.permission_denied_message)
         return redirect(self.permission_denied_url)

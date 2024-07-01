@@ -8,6 +8,7 @@ from .forms import StatusForm
 
 # Create your views here.
 
+
 class ListOfStatusesView(ListView):
     model = Status
     template_name = 'statuses/index.html'

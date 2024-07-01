@@ -11,12 +11,14 @@ def load_data(path):
     with open(os.path.abspath(f'task_manager/fixtures/{path}'), 'r') as file:
         return json.loads(file.read())
 
+
 remove_rollbar = modify_settings(
     MIDDLEWARE={
         'remove':
             ['rollbar.contrib.django.middleware.RollbarNotifierMiddleware', ]
     }
 )
+
 
 @remove_rollbar
 class TaskTestCase(TestCase):
@@ -29,9 +31,9 @@ class TaskTestCase(TestCase):
         self.task1 = Task.objects.get(pk=1)
         self.task2 = Task.objects.get(pk=2)
         self.task3 = Task.objects.get(pk=3)
-        
+
         self.tasks = Task.objects.all()
-        
+
         self.count = Task.objects.count()
 
         self.user1 = User.objects.get(pk=1)

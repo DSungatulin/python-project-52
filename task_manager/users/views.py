@@ -7,6 +7,7 @@ from .models import User
 from task_manager.mixins import AuthenticationMixin, AuthorizationMixin, DeleteProtectMixin
 # Create your views here.
 
+
 class IndexView(ListView):
     model = User
     template_name = 'users/index.html'

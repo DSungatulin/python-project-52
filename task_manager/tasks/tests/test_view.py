@@ -23,13 +23,13 @@ class TestListTasks(TaskTestCase):
         )
 
     def test_tasks_links(self):
-            response = self.client.get(reverse_lazy('tasks'))
+        response = self.client.get(reverse_lazy('tasks'))
 
-            self.assertContains(response, '/tasks/create/')
+        self.assertContains(response, '/tasks/create/')
 
-            for pk in range(1, self.count + 1):
-                self.assertContains(response, f'/tasks/{pk}/update/')
-                self.assertContains(response, f'/tasks/{pk}/delete/')
+        for pk in range(1, self.count + 1):
+            self.assertContains(response, f'/tasks/{pk}/update/')
+            self.assertContains(response, f'/tasks/{pk}/delete/')
 
     def test_tasks_not_logged_in_view(self):
         self.client.logout()

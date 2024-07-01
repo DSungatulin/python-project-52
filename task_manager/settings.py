@@ -37,8 +37,7 @@ ALLOWED_HOSTS = [
     '127.0.0.1',
     'localhost',
     os.getenv('RENDER_EXTERNAL_HOSTNAME'),
-    ]
-
+]
 
 
 # Application definition
@@ -75,6 +74,7 @@ MIDDLEWARE = [
 ROLLBAR = {
     'access_token': os.getenv('ROLLBAR_ACCESS_TOKEN'),
     'environment': 'development' if DEBUG else 'production',
+    'code_version': '1.0',
     'root': BASE_DIR,
 }
 
@@ -109,8 +109,6 @@ DATABASES = {
         conn_max_age=600
     )
 }
-
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators

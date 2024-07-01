@@ -11,10 +11,8 @@ class TestCreateTask(TaskTestCase):
             data=task_data
         )
 
-
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse_lazy('tasks'))
-
 
         self.assertEqual(Task.objects.count(), self.count + 1)
         self.assertEqual(
@@ -39,10 +37,8 @@ class TestUpdateTask(TaskTestCase):
             data=task_data
         )
 
-
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse_lazy('tasks'))
-
 
         self.assertEqual(Task.objects.count(), self.count)
         self.assertEqual(
@@ -62,6 +58,5 @@ class TestDeleteTask(TaskTestCase):
         )
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse_lazy('tasks'))
-
 
         self.assertEqual(Task.objects.count(), self.count - 1)

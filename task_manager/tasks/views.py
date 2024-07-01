@@ -12,6 +12,7 @@ from django_filters.views import FilterView
 from .filters import TaskFilter
 # Create your views here.
 
+
 class TaskListView(AuthenticationMixin, FilterView):
 
     model = Task
