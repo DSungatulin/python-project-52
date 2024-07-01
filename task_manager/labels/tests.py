@@ -33,7 +33,7 @@ class SetUpTestCase(TestCase):
 
         self.task = Task.objects.create(
             name='Work hard',
-            body='The only way to win',
+            description='The only way to win',
             status=Status.objects.get(pk=self.status.pk),
             executor=User.objects.get(pk=self.user.pk),
             author=self.user
