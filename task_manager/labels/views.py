@@ -48,15 +48,10 @@ class LabelUpdateView(AuthenticationMixin, SuccessMessageMixin, UpdateView):
 
 class LabelsDeleteView(AuthenticationMixin, SuccessMessageMixin, DeleteView):
 
-    template_name = 'labels/delete.html'
+    template_name = 'delete.html'
     model = Label
     success_url = reverse_lazy('labels_detail')
     success_message = _('Label successfully deleted')
-
-    extra_context = {
-        'title': _('Delete label'),
-        'button_text': _('Yes, delete'),
-    }
 
     def post(self, request, *args, **kwargs):
         label_id = kwargs['pk']
@@ -70,3 +65,12 @@ class LabelsDeleteView(AuthenticationMixin, SuccessMessageMixin, DeleteView):
             )
             return redirect('labels_detail')
         return super().post(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        label = self.get_object()
+        context['title'] = _('Delete')
+        context['message'] = _('Are you sure that you want to delete ')
+        context['button_text'] = _('Yes, delete')
+        context['entity_name'] = label.__str__()
+        return context
