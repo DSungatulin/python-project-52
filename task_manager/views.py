@@ -1,32 +1,24 @@
 from django.contrib.auth.views import LoginView, LogoutView
-from django.contrib.auth.forms import AuthenticationForm
+from django.views.generic import TemplateView
 from django.contrib.messages.views import SuccessMessageMixin
-from django.urls import reverse_lazy
-from django.shortcuts import render
 from django.utils.translation import gettext_lazy as _
 from django.contrib import messages
 
 
-def index(request):
-    return render(request, 'home.html')
+class HomePageView(TemplateView):
+    template_name = "home.html"
 
 
 class UserLogInView(SuccessMessageMixin, LoginView):
-    form_class = AuthenticationForm
     template_name = 'form.html'
-    success_url = reverse_lazy('home')
     success_message = _('You are logged in!')
     extra_context = {
         'title': _('Login'),
         'button_text': _('Enter'),
     }
 
-    def get_success_url(self) -> str:
-        return reverse_lazy('home')
-
 
 class UserLogOutView(LogoutView):
-    next_page = reverse_lazy('home')
     success_message = _('You are logged out')
 
     def dispatch(self, request, *args, **kwargs):
