@@ -48,7 +48,7 @@ class StatusUpdateTest(SetUpTestCase):
     def test_status_update_view(self):
         response = self.client.get(reverse_lazy('status-update', kwargs={'pk': self.status.pk}))
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, template_name='form.html')
+        self.assertTemplateUsed(response, template_name='statuses/update.html')
 
     def test_status_update_success(self):
         response = self.client.post(
@@ -72,7 +72,7 @@ class StatusDeleteTestCase(SetUpTestCase):
             'status-delete', kwargs={'pk': self.status.pk}
         ))
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, template_name='delete.html')
+        self.assertTemplateUsed(response, template_name='statuses/delete.html')
 
     def test_status_delete_success(self):
         response = self.client.post(

@@ -19,10 +19,6 @@ class TaskListView(AuthenticationMixin, FilterView):
     filterset_class = TaskFilter
     template_name = 'tasks/index.html'
     context_object_name = 'tasks'
-    extra_context = {
-        'title': _('Tasks'),
-        'button_text': _('Show'),
-    }
 
 
 class TaskDetailView(AuthenticationMixin, DetailView):
@@ -40,11 +36,7 @@ class TaskCreateView(AuthenticationMixin, SuccessMessageMixin, CreateView):
     form_class = TaskForm
     success_url = reverse_lazy('tasks')
     success_message = _('Task successfully created')
-    template_name = 'form.html'
-    extra_context = {
-        'title': _('Create task'),
-        'button_text': _('Create'),
-    }
+    template_name = 'tasks/create.html'
 
     def form_valid(self, form: BaseModelForm) -> HttpResponse:
         user = self.request.user
@@ -58,27 +50,14 @@ class TaskUpdateView(AuthenticationMixin, SuccessMessageMixin, UpdateView):
     form_class = TaskForm
     success_url = reverse_lazy('tasks')
     success_message = _('Task successfully updated')
-    template_name = 'form.html'
-    extra_context = {
-        'title': _('Update Task'),
-        'button_text': _('Update')
-    }
+    template_name = 'tasks/update.html'
 
 
 class TaskDeleteView(AuthenticationMixin, AuthorDeleteMixin, SuccessMessageMixin, DeleteView):
 
     model = Task
-    template_name = 'delete.html'
+    template_name = 'tasks/delete.html'
     author_message = _("You can't delete this task")
     author_url = reverse_lazy('tasks')
     success_message = _('Task successfully deleted')
     success_url = reverse_lazy('tasks')
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        task = self.get_object()
-        context['title'] = _('Delete')
-        context['message'] = _('Are you sure that you want to delete ')
-        context['button_text'] = _('Yes, delete')
-        context['entity_name'] = task.__str__()
-        return context
