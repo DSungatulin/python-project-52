@@ -61,3 +61,6 @@ class TaskDeleteView(AuthenticationMixin, AuthorDeleteMixin, SuccessMessageMixin
     author_url = reverse_lazy('tasks')
     success_message = _('Task successfully deleted')
     success_url = reverse_lazy('tasks')
+    extra_context = {
+        'title': _('Delete Task'),
+    }

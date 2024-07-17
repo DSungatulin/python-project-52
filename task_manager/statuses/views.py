@@ -39,6 +39,9 @@ class StatusDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     success_message = _('Status successfully deleted')
     success_url = reverse_lazy('statuses-detail')
     template_name = 'statuses/delete.html'
+    extra_context = {
+        'title': _('Delete Status'),
+    }
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

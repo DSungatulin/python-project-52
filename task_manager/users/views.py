@@ -30,6 +30,9 @@ class UserUpdateView(AuthenticationMixin, AuthorizationMixin, SuccessMessageMixi
     permission_denied_url = reverse_lazy('users-detail')
     success_message = _('User Profile is successfully changed')
     success_url = reverse_lazy('users-detail')
+    extra_context = {
+        'title': _('Delete User'),
+    }
 
 
 class UserDeleteView(DeleteProtectMixin, AuthenticationMixin, AuthorizationMixin, SuccessMessageMixin, DeleteView):
