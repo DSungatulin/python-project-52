@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-17 17:04+0600\n"
+"POT-Creation-Date: 2024-07-18 22:38+0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,8 +22,8 @@ msgstr ""
 
 #: task_manager/labels/forms.py:8 task_manager/statuses/forms.py:7
 #: task_manager/statuses/models.py:7 task_manager/tasks/models.py:11
-#: task_manager/templates/labels/index.html:16
-#: task_manager/templates/statuses/index.html:16
+#: task_manager/templates/labels/index.html:15
+#: task_manager/templates/statuses/index.html:15
 #: task_manager/templates/tasks/index.html:25
 msgid "Name"
 msgstr "Имя"
@@ -45,7 +45,7 @@ msgstr "Профиль пользователя успешно изменен"
 #, fuzzy
 #| msgid "Create user"
 msgid "Create Label"
-msgstr "Создать пользователя"
+msgstr "Создать метку"
 
 #: task_manager/labels/views.py:32 task_manager/templates/labels/create.html:16
 #: task_manager/templates/statuses/create.html:16
@@ -67,14 +67,14 @@ msgstr "Пользователь успешно удален"
 msgid "Update Label"
 msgstr "Обновить пользователя"
 
-#: task_manager/labels/views.py:45 task_manager/templates/labels/index.html:29
+#: task_manager/labels/views.py:45 task_manager/templates/labels/index.html:28
 #: task_manager/templates/labels/update.html:16
-#: task_manager/templates/statuses/index.html:30
+#: task_manager/templates/statuses/index.html:29
 #: task_manager/templates/statuses/update.html:16
 #: task_manager/templates/tasks/index.html:48
 #: task_manager/templates/tasks/task_details.html:60
 #: task_manager/templates/tasks/update.html:16
-#: task_manager/templates/users/index.html:25
+#: task_manager/templates/users/index.html:31
 #: task_manager/templates/users/update.html:16
 msgid "Update"
 msgstr "Обновить"
@@ -139,11 +139,11 @@ msgid "Delete Status"
 msgstr "Удалить"
 
 #: task_manager/statuses/views.py:49
-#: task_manager/templates/labels/index.html:31
-#: task_manager/templates/statuses/index.html:32
+#: task_manager/templates/labels/index.html:30
+#: task_manager/templates/statuses/index.html:31
 #: task_manager/templates/tasks/index.html:50
 #: task_manager/templates/tasks/task_details.html:62
-#: task_manager/templates/users/index.html:27
+#: task_manager/templates/users/index.html:33
 msgid "Delete"
 msgstr "Удалить"
 
@@ -234,7 +234,7 @@ msgstr "Удалить"
 #: task_manager/templates/tasks/task_details.html:6
 #: task_manager/templates/tasks/update.html:7
 #: task_manager/templates/users/create.html:7
-#: task_manager/templates/users/index.html:2
+#: task_manager/templates/users/index.html:6
 #: task_manager/templates/users/update.html:7
 msgid "Task Manager"
 msgstr "Менеджер Задач"
@@ -255,16 +255,22 @@ msgstr "Простое и гибкое веб-приложение для упр
 msgid "Get Started"
 msgstr "Начать"
 
-#: task_manager/templates/labels/index.html:17
-#: task_manager/templates/statuses/index.html:17
+#: task_manager/templates/labels/index.html:10
+#, fuzzy
+#| msgid "Create user"
+msgid "Create label"
+msgstr "Создать пользователя"
+
+#: task_manager/templates/labels/index.html:16
+#: task_manager/templates/statuses/index.html:16
 #: task_manager/templates/tasks/index.html:29
 #: task_manager/templates/tasks/task_details.html:43
-#: task_manager/templates/users/index.html:12
+#: task_manager/templates/users/index.html:17
 msgid "Creation date"
 msgstr "Дата создания"
 
 #: task_manager/templates/navbar.html:18
-#: task_manager/templates/users/index.html:4
+#: task_manager/templates/users/index.html:9
 msgid "Users"
 msgstr "Пользователи"
 
@@ -286,6 +292,7 @@ msgid "Sign Up"
 msgstr "Регистрация"
 
 #: task_manager/templates/statuses/create.html:11
+#: task_manager/templates/statuses/index.html:10
 #, fuzzy
 #| msgid "Create user"
 msgid "Create status"
@@ -322,11 +329,11 @@ msgstr "Создать пользователя"
 msgid "Register"
 msgstr "Регистрация"
 
-#: task_manager/templates/users/index.html:10
+#: task_manager/templates/users/index.html:15
 msgid "Username"
 msgstr "Имя пользователя"
 
-#: task_manager/templates/users/index.html:11
+#: task_manager/templates/users/index.html:16
 msgid "Full name"
 msgstr "Полное имя"
 
