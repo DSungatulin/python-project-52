@@ -4,11 +4,11 @@
 {% load i18n %}
 
 {% block title %}
-    {{ title }} | {% translate 'Task Manager' %}
+    {{ title }} | {% translate 'Task manager' %}
 {% endblock %}
 
 {% block content %}
-    <h1 class="my-4">{% trans 'Create Label' %}</h1>
+    <h1 class="my-4">{% trans 'Create label' %}</h1>
 
     <form method="post">
         {% csrf_token %}

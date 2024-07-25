@@ -28,7 +28,7 @@ class LabelCreateView(AuthenticationMixin, SuccessMessageMixin, CreateView):
     success_message = _("Label successfully created")
     success_url = reverse_lazy('labels_detail')
     extra_context = {
-        'title': _("Create Label"),
+        'title': _("Create label"),
         'button_text': _("Create"),
     }
 
