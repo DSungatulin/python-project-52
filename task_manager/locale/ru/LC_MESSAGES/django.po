@@ -45,7 +45,7 @@ msgstr "Профиль пользователя успешно изменен"
 #, fuzzy
 #| msgid "Create user"
 msgid "Create Label"
-msgstr "Создать метку"
+msgstr "Создать пользователя"
 
 #: task_manager/labels/views.py:32 task_manager/templates/labels/create.html:16
 #: task_manager/templates/statuses/create.html:16
