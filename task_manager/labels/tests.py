@@ -81,7 +81,7 @@ class LabelUpdateTest(SetUpTestCase):
         self.assertEqual(len(messages), 1)
         self.assertIn(str(messages[0]), [
             'Label successfully updated',
-            'Метка успешно обновлена'
+            'Метка успешно изменена'
         ])
 
 

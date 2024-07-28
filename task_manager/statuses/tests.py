@@ -38,7 +38,7 @@ class StatusCreateTest(SetUpTestCase):
         self.assertEqual(len(messages), 1)
         self.assertIn(str(messages[0]), [
             'Status successfully added',
-            'Статус успешно добавлен',
+            'Статус успешно создан',
         ])
         new_status = Status.objects.get(name='new_status')
         self.assertIsNotNone(new_status)
@@ -62,7 +62,7 @@ class StatusUpdateTest(SetUpTestCase):
         self.assertEqual(len(messages), 1)
         self.assertIn(str(messages[0]), [
             'Status successfully changed',
-            'Статус успешно изменён',
+            'Статус успешно изменен',
         ])
 
 
@@ -85,7 +85,7 @@ class StatusDeleteTestCase(SetUpTestCase):
         self.assertEqual(len(messages), 1)
         self.assertIn(str(messages[0]), [
             'Status successfully deleted',
-            'Статус успешно удалён',
+            'Статус успешно удален',
         ])
 
         with self.assertRaises(Status.DoesNotExist):
