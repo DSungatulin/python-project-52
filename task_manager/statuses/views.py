@@ -42,12 +42,3 @@ class StatusDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     extra_context = {
         'title': _('Delete Status'),
     }
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        status = self.get_object()
-        context['title'] = _('Delete')
-        context['message'] = _('Are you sure that you want to delete? ')
-        context['button_text'] = _('Yes, delete')
-        context['entity_name'] = status.__str__()
-        return context
