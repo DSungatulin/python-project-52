@@ -24,7 +24,7 @@ class TaskListView(AuthenticationMixin, FilterView):
 
 class TaskDetailView(AuthenticationMixin, DetailView):
     model = Task
-    template_name = 'tasks/task_detail.html'
+    template_name = 'tasks/task_details.html'
     extra_context = {
         'title': _('Viewing a task'),
     }
