@@ -40,7 +40,7 @@ class StatusDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     model = Status
     login_url = reverse_lazy('/login/')
     success_message = _('Status successfully deleted')
-    success_url = reverse_lazy('/statuses/')
+    success_url = reverse_lazy('statuses-detail')
     template_name = 'statuses/delete.html'
     extra_context = {
         'title': _('Delete Status'),
