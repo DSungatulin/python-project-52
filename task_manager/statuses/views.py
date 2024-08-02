@@ -1,4 +1,7 @@
 from django.urls import reverse_lazy
+from django.contrib import messages
+from django.shortcuts import redirect
+from django.db.models.deletion import ProtectedError
 from django.utils.translation import gettext_lazy as _
 from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
@@ -42,3 +45,13 @@ class StatusDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     extra_context = {
         'title': _('Delete Status'),
     }
+
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        try:
+            self.object.delete()
+            messages.success(self.request, self.success_message)
+            return redirect(self.success_url)
+        except ProtectedError:
+            messages.error(self.request, _("Cannot delete this status because it is referenced by one or more tasks."))
+            return redirect(self.success_url)
