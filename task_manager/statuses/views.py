@@ -1,13 +1,13 @@
 from django.urls import reverse_lazy
-from django.contrib import messages
-from django.shortcuts import redirect
-from django.db.models.deletion import ProtectedError
 from django.utils.translation import gettext_lazy as _
 from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Status
 from .forms import StatusForm
+from django.db.models.deletion import ProtectedError
+from django.shortcuts import redirect
+from django.contrib import messages
 
 # Create your views here.
 
@@ -40,7 +40,7 @@ class StatusDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     model = Status
     login_url = reverse_lazy('/login/')
     success_message = _('Status successfully deleted')
-    success_url = reverse_lazy('statuses-detail')
+    success_url = reverse_lazy('/statuses/')
     template_name = 'statuses/delete.html'
     extra_context = {
         'title': _('Delete Status'),
