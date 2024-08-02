@@ -51,7 +51,6 @@ class StatusDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
         try:
             self.object.delete()
             messages.success(self.request, self.success_message)
-            return redirect(self.success_url)
         except ProtectedError:
             messages.error(self.request, _("Cannot delete this status because it is referenced by one or more tasks."))
-            return redirect(self.success_url)
+        return redirect(self.success_url)
