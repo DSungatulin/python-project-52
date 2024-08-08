@@ -5,9 +5,6 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Status
 from .forms import StatusForm
-from django.db.models.deletion import ProtectedError
-from django.shortcuts import redirect
-from django.contrib import messages
 
 # Create your views here.
 
@@ -45,12 +42,3 @@ class StatusDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     extra_context = {
         'title': _('Delete Status'),
     }
-
-    def delete(self, request, *args, **kwargs):
-        self.object = self.get_object()
-        try:
-            self.object.delete()
-            messages.success(self.request, self.success_message)
-        except ProtectedError:
-            messages.error(self.request, _("Cannot delete this status because it is referenced by one or more tasks."))
-        return redirect(self.success_url)
