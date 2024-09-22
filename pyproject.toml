@@ -2,7 +2,7 @@
 name = "hexlet-code"
 version = "0.1.0"
 description = ""
-authors = ["ribeyra <ribeyra@gmail.com>"]
+authors = ["DSungatulin <sungatulindaniyar@gmail.com>"]
 readme = "README.md"
 packages = [
   { include = "task_manager" },
@@ -24,7 +24,9 @@ django-extensions = "^3.2.3"
 
 
 [tool.poetry.group.dev.dependencies]
-ipython = "^8.25.0"
+flake8 = "^7.0.0"
+coverage = "^7.5.1"
+pytest = "^8.2.1"
 
 [build-system]
 requires = ["poetry-core"]
