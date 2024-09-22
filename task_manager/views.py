@@ -1,24 +1,28 @@
 from django.contrib.auth.views import LoginView, LogoutView
-from django.views.generic import TemplateView
-from django.contrib.messages.views import SuccessMessageMixin
-from django.utils.translation import gettext_lazy as _
 from django.contrib import messages
+from django.shortcuts import render
+from django.utils.translation import gettext_lazy as _
 
 
-class HomePageView(TemplateView):
-    '''Return Home Page'''
-    template_name = "home.html"
+def index(request):
+    return render(request, 'index.html', context={})
 
 
-class UserLogInView(SuccessMessageMixin, LoginView):
-    '''Form log in User'''
-    template_name = 'form.html'
-    success_message = _('You are logged in !')
+class CustomLoginView(LoginView):
+    def form_valid(self, form):
+        messages.add_message(
+            self.request,
+            messages.SUCCESS,
+            _('You have successfully logged in.')
+        )
+        return super().form_valid(form)
 
 
-class UserLogOutView(LogoutView):
-    success_message = _('You are logged out')
-
+class CustomLogoutView(LogoutView):
     def dispatch(self, request, *args, **kwargs):
-        messages.info(request, _('You are logged out'))
+        messages.add_message(
+            request,
+            messages.INFO,
+            _('You have successfully logged out.')
+        )
         return super().dispatch(request, *args, **kwargs)

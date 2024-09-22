@@ -1,33 +1,18 @@
-install:
-	poetry install
-
-makemigrations:
-	python manage.py makemigrations
-
-migrate:
-	python manage.py migrate
-
 start:
-	python3 manage.py runserver
+	poetry run python -m gunicorn task_manager.asgi:application -k uvicorn.workers.UvicornWorker
 
-local:
-	poetry run django-admin makemessages --ignore="static" --ignore=".env"  -l ru
+dev-start:
+	poetry run python manage.py runserver
 
-translate:
-	poetry run django-admin compilemessages
+build:
+	./build.sh
 
-lint:
-	poetry run flake8 task_manager
+dev-build:
+	poetry install
+	poetry run python manage.py migrate
+
+shell:
+	poetry run python manage.py shell_plus --ipython
 
 test:
-	poetry run python3 manage.py test
-
-check:
-	poetry check
-
-test-coverage:
-	poetry run coverage run manage.py test
-	poetry run coverage report -m --include=task_manager/* --omit=task_manager/settings.py
-	poetry run coverage xml --include=task_manager/* --omit=task_manager/settings.py
-
-check: selfcheck test-coverage lint
+	poetry run python manage.py test

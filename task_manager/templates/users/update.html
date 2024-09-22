@@ -1,19 +1,19 @@
-{% extends "base.html" %}
-
-{% load django_bootstrap5 %}
+{% extends "layout.html" %}
 {% load i18n %}
-
-{% block title %}
-    {{ title }} | {% translate 'Task Manager' %}
-{% endblock %}
+{% load django_bootstrap5 %}
 
 {% block content %}
-    <h1 class="my-4">{% trans 'Update user' %}</h1>
 
-    <form method="post">
-        {% csrf_token %}
-        {% bootstrap_form form %}
-        {% trans 'Update' as button_text %}
-        {% bootstrap_button button_text button_type="submit" button_class="btn btn-primary" %}
-    </form>
+{% trans "Update" as update_text %}
+
+<h1 class="my-4">{% trans "Update User" %}</h1>
+
+<form action="{% url 'user_update' pk=user.pk %}" method="post" class="form">
+    {% csrf_token %}
+
+    {% bootstrap_form form %}
+
+    <input class="btn btn-primary" type="submit" value="{{ update_text }}">
+    
+</form>
 {% endblock %}

@@ -1,34 +1,41 @@
-## Hexlet tests and Codeclimate badges:
-[![Actions Status](https://github.com/DSungatulin/python-project-52/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/DSungatulin/python-project-52/actions)
-[![Maintainability](https://api.codeclimate.com/v1/badges/21469ff4d129c5eb7f37/maintainability)](https://codeclimate.com/github/DSungatulin/python-project-52/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/21469ff4d129c5eb7f37/test_coverage)](https://codeclimate.com/github/DSungatulin/python-project-52/test_coverage)
-
-# About Service
-Task Manager is a flexible web application for creating and tracking tasks. 
-The service requires user registration and authorization. The functionality allows you to create and view tasks yourself, assign an executor from existing users, add various statuses /labels for tasks.
+### Hexlet tests and linter status:
+[![Actions Status](https://github.com/Ribeyra/python-project-52/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/Ribeyra/python-project-52/actions)
 
 
-[**Task Manager Example**](https://python-project-52-mhbm.onrender.com)
+### CodeClimat status:
+[![Maintainability](https://api.codeclimate.com/v1/badges/0775a52162ae37c38b47/maintainability)](https://codeclimate.com/github/Ribeyra/python-project-52/maintainability)
+  
+  
+## Task Manager
+  
+**Project Description:**
+  
+[Task Manager](https://python-project-52-b9sw.onrender.com/) is a task management system. It allows you to set tasks, assign performers and change their statuses. To work with the system, registration and authentication are required:  
+  
+![Register form](https://raw.githubusercontent.com/Ribeyra/assets/main/screenshots/tm_register.png)  
+  
+![Login Notification](https://github.com/Ribeyra/assets/blob/main/screenshots/tm_login.png)  
+  
+![Task list](https://raw.githubusercontent.com/Ribeyra/assets/main/screenshots/tm_tasks.png)  
 
 
-## Dependencies
-- _python = "^3.10"_
-- _poetry = "^version 1.7.1"_
+**System Requirements:**  
 
-## Instructions for the deployment
-Environment variables for application deployment:
-- SECRET_KEY(django application key)
-- DATABASE_URL(postgresql url)
-- DEBUG(For deploy = Flase, for dev = True)
-- ROLLBAR_ACCESS_TOKEN(Roll bar token for real-time error tracking on the service rollbar.com)
-- Documentation for deployment on the service render.com: https://docs.render.com/deploy-django
+*nix-compatible operating system.  
+Python^3.10.  
 
-## Install & Start
-```bash
-git clone git@github.com:DSungatulin/python-project-52.git
-cd python-project-52/
-# install poetry
-make install
-# start server locally
-make dev
-```
+**Installation:**  
+
+To install the app, use the following command:  
+
+```python3 -m pip install --user git+https://github.com/Ribeyra/python-project-52```  
+
+**How to start server:**  
+
+```make start``` or ```make dev-start``` to Starting development server  
+
+**Uninstallation:**  
+
+To remove app, use:  
+
+```python3 -m pip uninstall hexlet-code```  

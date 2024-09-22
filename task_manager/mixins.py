@@ -1,61 +1,103 @@
+from django.db.models import ProtectedError
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.utils.translation import gettext as _
-from django.urls import reverse_lazy
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.db.models import ProtectedError
 
 
-class AuthenticationMixin(LoginRequiredMixin):
-    '''Check Authentication of current User'''
+class LoginRequiredMixinWithFlash(LoginRequiredMixin):
+    def handle_no_permission(self):
+        messages.add_message(
+            self.request,
+            messages.ERROR,
+            _('You are not authorized! Please log in')
+        )
+        return redirect('login')
 
-    auth_messages = _('You are not logged in! You need to log in.')
+
+class ObjectPermissionMixin:
+    """
+    Mixin to enforce object-level permissions based on a user attribute.
+
+    Attributes:
+        object_attr (str): The attribute of the object that should be compared
+            to the user. Defaults to 'id'.
+        success_url (str): The URL to redirect to if the permission check
+            fails. Defaults to 'index'.
+        permission_error_message (str): The error message to display if the
+            permission check fails. Defaults to 'You do not have permission to
+            perform this action.'.
+
+    Methods:
+        dispatch(request, *args, **kwargs):
+            Override the default dispatch method to enforce the permission
+            check. If the user does not have permission, add an error message
+            and redirect to the success URL.
+
+        add_flash_and_redirect(request):
+            Add an error message to the messages framework and redirect to the
+            success URL.
+    """
+    object_attr = 'id'
+    success_url = 'index'
+    permission_error_message = _(
+        'You do not have permission to perform this action.'
+    )
 
     def dispatch(self, request, *args, **kwargs):
-        if not request.user.is_authenticated:
-            messages.error(request, self.auth_messages)
-            return redirect(reverse_lazy('login'))
+        """
+        Override the default dispatch method to enforce the permission check.
+
+        Args:
+            request (HttpRequest): The HTTP request object.
+            *args: Additional positional arguments.
+            **kwargs: Additional keyword arguments.
+
+        Returns:
+            HttpResponse: A redirect response if the permission check fails,
+            or the result of the superclass dispatch method if it passes.
+        """
+        obj = self.get_object()
+        obj_user_attr = getattr(obj, self.object_attr)
+        user = request.user
+
+        if isinstance(obj_user_attr, int):
+            if obj_user_attr != getattr(user, 'id'):
+                return self.add_flash_and_redirect(request)
+        else:
+            if getattr(obj_user_attr, 'id') != getattr(user, 'id'):
+                return self.add_flash_and_redirect(request)
 
         return super().dispatch(request, *args, **kwargs)
 
+    def add_flash_and_redirect(self, request):
+        """
+        Add an error message to the messages framework and redirect to the
+        success URL.
 
-class AuthorizationMixin(UserPassesTestMixin):
-    '''Authorization Check'''
+        Args:
+            request (HttpRequest): The HTTP request object.
 
-    permission_denied_message = None
-    permission_denied_url = None
-
-    def test_func(self):
-        '''Check user'''
-
-        return self.get_object() == self.request.user
-
-    def handle_no_permission(self):
-        '''If error permission,
-        we handle this error and redirect to denied url'''
-
-        messages.error(self.request, self.permission_denied_message)
-        return redirect(self.permission_denied_url)
+        Returns:
+            HttpResponse: A redirect response to the success URL.
+        """
+        messages.add_message(
+            request,
+            messages.ERROR,
+            self.permission_error_message
+        )
+        return redirect(self.success_url)
 
 
-class DeleteProtectMixin:
-    protected_message = None
-    protected_url = None
+class ProtectedErrorHandlingMixin:
+    success_url = 'index'
+    protected_error_message = _(
+        'Cannot delete this object because it is in use'
+    )
 
     def post(self, request, *args, **kwargs):
         try:
             return super().post(request, *args, **kwargs)
         except ProtectedError:
-            messages.error(request, self.protected_message)
-            return redirect(self.protected_url)
-
-
-class AuthorDeleteMixin:
-    author_message = None
-    author_url = None
-
-    def dispatch(self, request, *args, **kwargs):
-        if request.user.id != self.get_object().author.id:
-            messages.error(self.request, self.author_message)
-            return redirect(self.author_url)
-        return super().dispatch(request, *args, **kwargs)
+            messages.error(request, self.protected_error_message)
+            return redirect(self.success_url)

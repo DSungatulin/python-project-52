@@ -1,8 +1,20 @@
-{% extends "delete_parent.html" %}
-
+{% extends "layout.html" %}
 {% load i18n %}
+{% load django_bootstrap5 %}
 
-{% block confirmation_message %}
-{% trans 'Are you sure that you want to delete ' %} {{ status.name }} ?
+{% block content %}
 
+<h1 class="my-4">{% trans "Delete Status" %}</h1>
+
+<p>{% trans "Are you sure you want to delete" %} {{ status.name }}?</p>
+
+<form action="{% url 'status_delete' pk=status.id %}" method="post" class="form">
+
+    {% csrf_token %}
+
+    {% trans "Yes, Delete" as delete_text %}
+
+    <input class="btn btn-danger" type="submit" value="{{ delete_text }}">
+    
+</form>
 {% endblock %}

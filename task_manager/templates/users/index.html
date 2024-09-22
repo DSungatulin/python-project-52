@@ -1,40 +1,35 @@
-{% extends "base.html" %}
-
-{% load django_bootstrap5 %}
+{% extends "layout.html" %}
 {% load i18n %}
 
-{% block title %}{{ page_title }} | {% trans 'Task Manager' %}{% endblock %}
-
 {% block content %}
-    <h1 class="my-4">{% trans 'Users' %}</h1>
-
-    <table class="table table-striped">
-        <thead class="thead-dark">
-            <tr>
-                <th>ID</th>
-                <th>{% trans 'Username' %}</th>
-                <th>{% trans 'Full name' %}</th>
-                <th>{% trans 'Creation date' %}</th>
-                <th></th>
-            </tr>
-        </thead>
-
-        <tbody>
-            {% if users %}
+<h1 class="my-4">{% trans "Users" %}</h1>
+    
+    <div class="table table-striped"></div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>{% trans "Username" %}</th>
+                    <th>{% trans "Full name" %}</th>
+                    <th>{% trans "Created at" %}</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
                 {% for user in users %}
-                    <tr>
-                        <td>{{ user.id }}</td>
-                        <td>{{ user.username }}</td>
-                        <td>{{ user.first_name }} {{ user.last_name }}</td>
-                        <td>{{ user.date_joined|date:"d.m.Y H:i" }}</td>
-                        <td>
-                          <a href="{% url 'user-update' pk=user.id %}">{% trans 'Update' %}</a>
-                          <br>
-                          <a href="{% url 'user-delete' pk=user.id %}">{% trans 'Delete' %}</a>
-                        </td>
-                    </tr>
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user }}</td>
+                    <td>{{ user.date_joined|date:"d.m.Y" }} {{ user.date_joined|time:"H:i" }}</td>
+                    <td>
+                        <a href="{% url 'user_update' pk=user.id %}">{% trans "Update" %}</a>
+                        <br>
+                        <a href="{% url 'user_delete' pk=user.id %}">{% trans "Delete" %}</a>
+                    </td>
+                </tr>
                 {% endfor %}
-            {% endif %}
-        </tbody>
-    </table>
-{% endblock content %}
+            </tbody>
+        </table>
+    </div> 
+{% endblock %}
