@@ -10,7 +10,16 @@
         <h1 class="my-4"></h1>
         <p class="lead">{% trans "Simple and flexible task management web application" %}</p>
         <hr>
-        <a class="btn btn-primary btn-lg" href="https://github.com/DSungatulin">{% trans "learn more" %}</a>
-    </div>
+
+      {% if user.is_authenticated %}
+          <a class="btn btn-primary btn-lg" href="{% url 'tasks' %}">
+      {% else %}
+          <a class="btn btn-primary btn-lg" href="{% url 'login' %}">
+      {% endif %}
+
+      {% trans 'Get Started' %}
+      </a>
+
+  </div>
 </div>
 {% endblock %}
