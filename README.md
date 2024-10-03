@@ -1,7 +1,7 @@
 ## Hexlet tests and Codeclimate badges:
 [![Actions Status](https://github.com/DSungatulin/python-project-52/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/DSungatulin/python-project-52/actions)
-[![Maintainability](https://api.codeclimate.com/v1/badges/21469ff4d129c5eb7f37/maintainability)](https://codeclimate.com/github/DSungatulin/python-project-52/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/21469ff4d129c5eb7f37/test_coverage)](https://codeclimate.com/github/DSungatulin/python-project-52/test_coverage)
+[![Maintainability](https://api.codeclimate.com/v1/badges/3a02112663653215e48f/maintainability)](https://codeclimate.com/github/DSungatulin/python-project-52/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/3a02112663653215e48f/test_coverage)](https://codeclimate.com/github/DSungatulin/python-project-52/test_coverage)
 
 # About Service
 Task Manager is a flexible web application for creating and tracking tasks. 
