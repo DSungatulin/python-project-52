@@ -2,8 +2,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic import CreateView, UpdateView, DeleteView, ListView
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
-from task_manager.mixins import LoginRequiredMixinWithFlash, \
-    ProtectedErrorHandlingMixin
+from task_manager.mixins import LoginRequiredMixinWithFlash, ProtectedErrorHandlingMixin
 from .models import Status
 from .forms import StatusCreationForm
 
