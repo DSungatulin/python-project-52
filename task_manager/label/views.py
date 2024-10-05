@@ -44,14 +44,12 @@ class DeleteLabel(
 
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
-        # Проверяем, используется ли метка в задачах
         if self.object.task_labels.all().exists():
             messages.error(
                 request,
                 _('Cannot remove label because it is in use')
             )
             return redirect(self.success_url)
-        # Если метка не используется в задачах, удаляем её
         return super().post(request, *args, **kwargs)
 
 
