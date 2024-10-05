@@ -18,7 +18,6 @@ The service requires user registration and authorization. The functionality allo
 Environment variables for application deployment:
 - SECRET_KEY(django application key)
 - DATABASE_URL(postgresql url)
-- DEBUG(For deploy = Flase, for dev = True)
 - ROLLBAR_ACCESS_TOKEN(Roll bar token for real-time error tracking on the service rollbar.com)
 - Documentation for deployment on the service render.com: https://docs.render.com/deploy-django
 
