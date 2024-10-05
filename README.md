@@ -7,7 +7,7 @@
 Task Manager is a flexible web application for creating and tracking tasks. 
 The service requires user registration and authorization. The functionality allows you to create and view tasks yourself, assign an executor from existing users, add various statuses /labels for tasks.
 
-[![Live domen](https://python-project-52-mhbm.onrender.com)]
+[Live domen](https://python-project-52-mhbm.onrender.com)
 ![](docs/images/home_page.jpg)
 
 ## Dependencies
