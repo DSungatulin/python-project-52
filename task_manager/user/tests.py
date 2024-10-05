@@ -14,8 +14,8 @@ class CreateUserTest(TestCase):
         url = reverse('user_create')
         user_data = {
             'username': 'testuser',
-            'password1': 'Testpassword123',
-            'password2': 'Testpassword123',
+            'password1': 'Testuserpassword123',
+            'password2': 'Testuserpassword123',
             'first_name': 'Test',
             'last_name': 'User'
         }
@@ -33,11 +33,11 @@ class UpdateUserTest(TestCase):
     def setUp(self):
         self.user = get_user_model().objects.create_user(
             username='testuser',
-            password='Testpassword123',
+            password='Testuserpassword123',
             first_name='Test',
             last_name='User'
         )
-        self.client.login(username='testuser', password='Testpassword123')
+        self.client.login(username='testuser', password='Testuserpassword123')
 
     def test_update_user_view(self):
         url = reverse('user_update', args=[self.user.pk])
@@ -69,9 +69,9 @@ class DeleteUserTest(TestCase):
     def setUp(self):
         self.user = get_user_model().objects.create_user(
             username='testuser',
-            password='Testpassword123'
+            password='Testuserpassword123'
         )
-        self.client.login(username='testuser', password='Testpassword123')
+        self.client.login(username='testuser', password='Testuserpassword123')
 
     def test_delete_user_view(self):
         url = reverse('user_delete', args=[self.user.pk])
@@ -93,9 +93,9 @@ class UserListViewTest(TestCase):
     def setUp(self):
         self.user = get_user_model().objects.create_user(
             username='testuser',
-            password='Testpassword123'
+            password='Testuserpassword123'
         )
-        self.client.login(username='testuser', password='Testpassword123')
+        self.client.login(username='testuser', password='Testuserpassword123')
 
     def test_user_list_view(self):
         url = reverse('users')

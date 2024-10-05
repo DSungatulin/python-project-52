@@ -7,13 +7,13 @@ from .models import Label
 class LabelTests(TestCase):
     def setUp(self):
         self.user = get_user_model().objects.create_user(
-            username='testuser',
-            password='testpassword123'
+            username='testlabel',
+            password='testlabelpassword123'
         )
-        self.client.login(username='testuser', password='testpassword123')
+        self.client.login(username='testlabel', password='testlabelpassword123')
         self.label = Label.objects.create(
             name='Test Label',
-            description='Test Description'
+            description='Test Label Description'
         )
 
     def test_create_label_view(self):
@@ -26,7 +26,7 @@ class LabelTests(TestCase):
         url = reverse('label_create')
         label_data = {
             'name': 'New Label',
-            'description': 'New Description'
+            'description': 'New Label Description'
         }
         response = self.client.post(url, label_data)
         self.assertEqual(response.status_code, 302)
@@ -43,14 +43,14 @@ class LabelTests(TestCase):
         url = reverse('label_update', args=[self.label.pk])
         updated_data = {
             'name': 'Updated Label',
-            'description': 'Updated Description'
+            'description': 'Updated Label Description'
         }
         response = self.client.post(url, updated_data)
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse('labels'))
         self.label.refresh_from_db()
         self.assertEqual(self.label.name, 'Updated Label')
-        self.assertEqual(self.label.description, 'Updated Description')
+        self.assertEqual(self.label.description, 'Updated Label Description')
 
     def test_delete_label_view(self):
         url = reverse('label_delete', args=[self.label.pk])

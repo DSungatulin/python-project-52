@@ -7,13 +7,13 @@ from .models import Status
 class StatusTests(TestCase):
     def setUp(self):
         self.user = get_user_model().objects.create_user(
-            username='testuser', password='testpassword123'
+            username='teststatus', password='teststatuspassword123'
         )
         self.client.login(
-            username='testuser', password='testpassword123'
+            username='teststatus', password='teststatuspassword123'
         )
         self.status = Status.objects.create(
-            name='Test Status', description='Test Description'
+            name='Test Status', description='Test Status Description'
         )
 
     def test_create_status_view(self):
@@ -26,7 +26,7 @@ class StatusTests(TestCase):
         url = reverse('status_create')
         status_data = {
             'name': 'New Status',
-            'description': 'New Description'
+            'description': 'New Status Description'
         }
         response = self.client.post(url, status_data)
         self.assertEqual(response.status_code, 302)
@@ -43,14 +43,14 @@ class StatusTests(TestCase):
         url = reverse('status_update', args=[self.status.pk])
         updated_data = {
             'name': 'Updated Status',
-            'description': 'Updated Description'
+            'description': 'Updated Status Description'
         }
         response = self.client.post(url, updated_data)
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse('statuses'))
         self.status.refresh_from_db()
         self.assertEqual(self.status.name, 'Updated Status')
-        self.assertEqual(self.status.description, 'Updated Description')
+        self.assertEqual(self.status.description, 'Updated Status Description')
 
     def test_delete_status_view(self):
         url = reverse('status_delete', args=[self.status.pk])

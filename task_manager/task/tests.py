@@ -9,10 +9,10 @@ from task_manager.label.models import Label
 class TaskTests(TestCase):
     def setUp(self):
         self.user = get_user_model().objects.create_user(
-            username='testuser',
-            password='testpassword123'
+            username='testtask',
+            password='testtaskpassword123'
         )
-        self.client.login(username='testuser', password='testpassword123')
+        self.client.login(username='testtask', password='testtaskpassword123')
 
         self.status = Status.objects.create(
             name='Open',
@@ -25,7 +25,7 @@ class TaskTests(TestCase):
 
         self.task = Task.objects.create(
             name='Test Task',
-            description='Test Description',
+            description='Test Task Description',
             status=self.status,
             executor=self.user,
             author=self.user
@@ -42,7 +42,7 @@ class TaskTests(TestCase):
         url = reverse('task_create')
         task_data = {
             'name': 'New Task',
-            'description': 'New Description',
+            'description': 'New Task Description',
             'status': self.status.id,
             'executor': self.user.id,
             'labels': [self.labels.id]
@@ -62,7 +62,7 @@ class TaskTests(TestCase):
         url = reverse('task_update', args=[self.task.pk])
         updated_data = {
             'name': 'Updated Task',
-            'description': 'Updated Description',
+            'description': 'Updated Task Description',
             'status': self.status.id,
             'executor': self.user.id,
             'labels': [self.labels.id]
@@ -72,7 +72,7 @@ class TaskTests(TestCase):
         self.assertRedirects(response, reverse('tasks'))
         self.task.refresh_from_db()
         self.assertEqual(self.task.name, 'Updated Task')
-        self.assertEqual(self.task.description, 'Updated Description')
+        self.assertEqual(self.task.description, 'Updated Task Description')
 
     def test_delete_task_view(self):
         url = reverse('task_delete', args=[self.task.pk])
@@ -134,7 +134,7 @@ class TaskFilterTests(TestCase):
 
         self.task1 = Task.objects.create(
             name='Task 1',
-            description='Description 1',
+            description='Task Description 1',
             status=self.status1,
             executor=self.user1,
             author=self.user1
@@ -143,7 +143,7 @@ class TaskFilterTests(TestCase):
 
         self.task2 = Task.objects.create(
             name='Task 2',
-            description='Description 2',
+            description='Task Description 2',
             status=self.status2,
             executor=self.user2,
             author=self.user2
