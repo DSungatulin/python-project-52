@@ -8,7 +8,7 @@ def index(request):
     return render(request, 'index.html', context={})
 
 
-class CustomLoginView(LoginView):
+class LoginView(LoginView):
     def form_valid(self, form):
         messages.add_message(
             self.request,
@@ -18,7 +18,7 @@ class CustomLoginView(LoginView):
         return super().form_valid(form)
 
 
-class CustomLogoutView(LogoutView):
+class LogoutView(LogoutView):
     def dispatch(self, request, *args, **kwargs):
         messages.add_message(
             request,
