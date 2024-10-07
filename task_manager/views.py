@@ -1,11 +1,10 @@
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib import messages
 from django.shortcuts import render
-from django.views.generic import View
 from django.utils.translation import gettext_lazy as _
 
 
-class IndexView(View):
+class IndexView:
     def index(request):
         return render(request, 'index.html', context={})
 
