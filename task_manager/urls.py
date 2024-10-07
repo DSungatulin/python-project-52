@@ -16,14 +16,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from .user.forms import CustomAuthenticationForm
 from task_manager import views
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('login/', views.CustomLoginView.as_view(
-        template_name='login.html', authentication_form=CustomAuthenticationForm), name='login'
-    ),
+    path('login/', views.CustomLoginView.as_view(template_name='login.html'), name='login'),
     path('logout/', views.CustomLogoutView.as_view(), name='logout'),
     path('users/', include('task_manager.user.urls')),
     path('statuses/', include('task_manager.status.urls')),
