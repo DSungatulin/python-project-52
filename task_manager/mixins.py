@@ -101,3 +101,15 @@ class ProtectedErrorHandlingMixin:
         except ProtectedError:
             messages.error(request, self.protected_error_message)
             return redirect(self.success_url)
+
+
+class SuccessMessageMixin:
+    success_message = _('Action was successful.')
+
+    def form_valid(self, form):
+        messages.add_message(
+            self.request,
+            messages.SUCCESS,
+            self.success_message
+        )
+        return super().form_valid(form)
