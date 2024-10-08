@@ -4,9 +4,8 @@ from django.shortcuts import render
 from django.utils.translation import gettext_lazy as _
 
 
-class IndexView:
-    def index(request):
-        return render(request, 'index.html', context={})
+def index(request):
+    return render(request, 'index.html', context={})
 
 
 class LoginView(LoginView):
