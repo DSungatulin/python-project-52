@@ -20,9 +20,5 @@ class LoginView(LoginView):
 
 class LogoutView(LogoutView):
     def dispatch(self, request, *args, **kwargs):
-        messages.add_message(
-            request,
-            messages.INFO,
-            _('You have successfully logged out.')
-        )
+        messages.info(request, _('You are logged out'))
         return super().dispatch(request, *args, **kwargs)
