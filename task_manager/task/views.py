@@ -57,20 +57,6 @@ class TaskListView(LoginRequiredMixinWithFlash, FilterView):
     context_object_name = 'tasks'
     filterset_class = TaskFilter
 
-    def get_queryset(self):
-        return self.model.objects.select_related(
-            'status',
-            'author',
-            'executor'
-        ).all()
-
-    def get_filterset(self, filterset_class):
-        return filterset_class(
-            data=self.request.GET or None,
-            request=self.request,
-            queryset=self.get_queryset()
-        )
-
 
 class TaskDetailView(LoginRequiredMixinWithFlash, DetailView):
     model = Task
