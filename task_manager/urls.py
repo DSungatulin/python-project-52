@@ -19,7 +19,7 @@ from django.urls import path, include
 from task_manager import views
 
 urlpatterns = [
-    path('', views.index, name='index'),
+    path('', views.IndexView.as_view(), name='index'),
     path('login/', views.LoginView.as_view(template_name='login.html'), name='login'),
     path('logout/', views.LogoutView.as_view(), name='logout'),
     path('users/', include('task_manager.user.urls')),

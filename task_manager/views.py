@@ -1,10 +1,10 @@
 from django.contrib.auth.views import LoginView, LogoutView
 from .mixins import LoginMessageMixin, LogoutMessageMixin
-from django.shortcuts import render
+from django.views.generic import TemplateView
 
 
-def index(request):
-    return render(request, 'index.html', context={})
+class IndexView(TemplateView):
+    template_name = 'index.html'
 
 
 class LoginView(LoginMessageMixin, LoginView):
