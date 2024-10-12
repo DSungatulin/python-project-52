@@ -101,3 +101,15 @@ class ProtectedErrorHandlingMixin:
         except ProtectedError:
             messages.error(request, self.protected_error_message)
             return redirect(self.success_url)
+
+
+class LoginMessageMixin:
+    def form_valid(self, form):
+        messages.add_message(self.request, messages.SUCCESS, _('You have successfully logged in.'))
+        return super().form_valid(form)
+
+
+class LogoutMessageMixin:
+    def dispatch(self, request, *args, **kwargs):
+        messages.info(request, _('You are logged out'))
+        return super().dispatch(request, *args, **kwargs)
