@@ -4,7 +4,7 @@ from django.views.generic import CreateView, UpdateView, DeleteView, ListView
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 from task_manager.mixins import LoginRequiredMixinWithFlash, \
-    ObjectPermissionMixin, ProtectedErrorHandlingMixin
+    UserChangeOwnDataMixin, ProtectedErrorHandlingMixin
 from .forms import CustomUserCreationForm, CustomUserChangeForm
 
 
@@ -17,7 +17,7 @@ class CreateUser(SuccessMessageMixin, CreateView):
 
 class UpdateUser(
     LoginRequiredMixinWithFlash,
-    ObjectPermissionMixin,
+    UserChangeOwnDataMixin,
     SuccessMessageMixin,
     UpdateView
 ):
@@ -33,7 +33,7 @@ class UpdateUser(
 
 class DeleteUser(
     LoginRequiredMixinWithFlash,
-    ObjectPermissionMixin,
+    UserChangeOwnDataMixin,
     ProtectedErrorHandlingMixin,
     SuccessMessageMixin,
     DeleteView

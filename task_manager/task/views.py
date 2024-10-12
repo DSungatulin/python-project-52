@@ -3,7 +3,7 @@ from django.views.generic import CreateView, UpdateView, DeleteView, DetailView
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 from django_filters.views import FilterView
-from task_manager.mixins import LoginRequiredMixinWithFlash, ObjectPermissionMixin
+from task_manager.mixins import LoginRequiredMixinWithFlash, UserChangeOwnDataMixin
 from .filters import TaskFilter
 from .models import Task
 from .forms import TaskCreationForm
@@ -38,7 +38,7 @@ class UpdateTask(
 
 class DeleteTask(
     LoginRequiredMixinWithFlash,
-    ObjectPermissionMixin,
+    UserChangeOwnDataMixin,
     SuccessMessageMixin,
     DeleteView
 ):
