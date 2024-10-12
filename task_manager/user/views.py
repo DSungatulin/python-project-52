@@ -18,7 +18,7 @@ class UserChangePermissionMixin(UserPassesTestMixin):
 class CreateUser(SuccessMessageMixin, CreateView):
     template_name = 'users/create.html'
     form_class = CustomUserCreationForm
-    success_url = reverse_lazy('login')
+    success_url = reverse_lazy('users')
     success_message = _('User successfully registered')
 
 
