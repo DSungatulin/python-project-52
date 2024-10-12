@@ -3,28 +3,21 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic import CreateView, UpdateView, DeleteView, ListView
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
-from django.contrib.auth.mixins import UserPassesTestMixin
-from task_manager.mixins import LoginRequiredMixinWithFlash, ProtectedErrorHandlingMixin
+from task_manager.mixins import LoginRequiredMixinWithFlash, \
+    ObjectPermissionMixin, ProtectedErrorHandlingMixin
 from .forms import CustomUserCreationForm, CustomUserChangeForm
-
-
-class UserChangePermissionMixin(UserPassesTestMixin):
-    def test_func(self):
-        user = self.request.user
-        obj_user = self.get_object()
-        return user == obj_user
 
 
 class CreateUser(SuccessMessageMixin, CreateView):
     template_name = 'users/create.html'
     form_class = CustomUserCreationForm
-    success_url = reverse_lazy('users')
+    success_url = reverse_lazy('login')
     success_message = _('User successfully registered')
 
 
 class UpdateUser(
     LoginRequiredMixinWithFlash,
-    UserChangePermissionMixin,
+    ObjectPermissionMixin,
     SuccessMessageMixin,
     UpdateView
 ):
@@ -33,12 +26,14 @@ class UpdateUser(
     template_name = 'users/update.html'
     success_url = reverse_lazy('users')
     success_message = _('User successfully updated')
-    permission_error_message = _('You do not have permission to change another user')
+    permission_error_message = _(
+        'You do not have permission to change another user'
+    )
 
 
 class DeleteUser(
     LoginRequiredMixinWithFlash,
-    UserChangePermissionMixin,
+    ObjectPermissionMixin,
     ProtectedErrorHandlingMixin,
     SuccessMessageMixin,
     DeleteView
@@ -47,7 +42,9 @@ class DeleteUser(
     model = get_user_model()
     success_url = reverse_lazy('users')
     success_message = _('User deleted successfully')
-    permission_error_message = _('You do not have permission to change another user')
+    permission_error_message = _(
+        'You do not have permission to change another user'
+    )
     protected_error_message = _('Cannot delete user because it is in use')
 
 
