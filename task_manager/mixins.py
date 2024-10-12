@@ -1,6 +1,6 @@
 from django.db.models import ProtectedError
 from django.contrib import messages
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.utils.translation import gettext as _
 
@@ -15,7 +15,7 @@ class LoginRequiredMixinWithFlash(LoginRequiredMixin):
         return redirect('login')
 
 
-class ObjectPermissionMixin(UserPassesTestMixin):
+class ObjectPermissionMixin:
     """
     Mixin to enforce object-level permissions based on a user attribute.
 
@@ -44,19 +44,45 @@ class ObjectPermissionMixin(UserPassesTestMixin):
         'You do not have permission to perform this action.'
     )
 
-    def test_func(self):
+    def dispatch(self, request, *args, **kwargs):
+        """
+        Override the default dispatch method to enforce the permission check.
+
+        Args:
+            request (HttpRequest): The HTTP request object.
+            *args: Additional positional arguments.
+            **kwargs: Additional keyword arguments.
+
+        Returns:
+            HttpResponse: A redirect response if the permission check fails,
+            or the result of the superclass dispatch method if it passes.
+        """
         obj = self.get_object()
         obj_user_attr = getattr(obj, self.object_attr)
-        user = self.request.user
+        user = request.user
 
         if isinstance(obj_user_attr, int):
-            return obj_user_attr == user.id
+            if obj_user_attr != getattr(user, 'id'):
+                return self.add_flash_and_redirect(request)
         else:
-            return getattr(obj_user_attr, 'id') == user.id
+            if getattr(obj_user_attr, 'id') != getattr(user, 'id'):
+                return self.add_flash_and_redirect(request)
 
-    def handle_no_permission(self):
+        return super().dispatch(request, *args, **kwargs)
+
+    def add_flash_and_redirect(self, request):
+        """
+        Add an error message to the messages framework and redirect to the
+        success URL.
+
+        Args:
+            request (HttpRequest): The HTTP request object.
+
+        Returns:
+            HttpResponse: A redirect response to the success URL.
+        """
         messages.add_message(
-            self.request,
+            request,
             messages.ERROR,
             self.permission_error_message
         )
