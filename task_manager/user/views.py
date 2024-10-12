@@ -33,7 +33,7 @@ class UpdateUser(
     template_name = 'users/update.html'
     success_url = reverse_lazy('users')
     success_message = _('User successfully updated')
-    permission_denied_message = _('You do not have permission to change another user')
+    permission_error_message = _('You do not have permission to change another user')
 
 
 class DeleteUser(
@@ -47,7 +47,7 @@ class DeleteUser(
     model = get_user_model()
     success_url = reverse_lazy('users')
     success_message = _('User deleted successfully')
-    permission_denied_message = _('You do not have permission to change another user')
+    permission_error_message = _('You do not have permission to change another user')
     protected_error_message = _('Cannot delete user because it is in use')
 
 
