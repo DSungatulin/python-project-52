@@ -57,3 +57,11 @@ class UserChangeOwnDataMixin(UserPassesTestMixin):
                 return False
 
         return True
+
+    def handle_no_permission(self):
+        messages.add_message(
+            self.request,
+            messages.ERROR,
+            _('You do not have permission to change another user')
+        )
+        return redirect('users')
