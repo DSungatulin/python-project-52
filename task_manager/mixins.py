@@ -59,19 +59,9 @@ class UserChangeOwnDataMixin(UserPassesTestMixin):
         return True
 
     def handle_no_permission(self):
-        if self.object_attr == 'id':
-            messages.add_message(
-                self.request,
-                messages.ERROR,
-                _('You do not have permission to delete another user')
-            )
-            return redirect('users')
-        elif self.object_attr == 'author':
-            messages.add_message(
-                self.request,
-                messages.ERROR,
-                _('You do not have permission to delete another task')
-            )
-            return redirect('tasks')
-        else:
-            raise NotImplementedError
+        messages.add_message(
+            self.request,
+            messages.ERROR,
+            _('You do not have permission to change another user')
+        )
+        return redirect('users')
