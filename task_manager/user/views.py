@@ -18,6 +18,7 @@ class CreateUser(SuccessMessageMixin, CreateView):
 class UpdateUser(
     LoginRequiredMixinWithFlash,
     UserChangeOwnDataMixin,
+    SuccessMessageMixin,
     UpdateView
 ):
     model = get_user_model()
@@ -30,6 +31,7 @@ class UpdateUser(
 class DeleteUser(
     LoginRequiredMixinWithFlash,
     UserChangeOwnDataMixin,
+    SuccessMessageMixin,
     ProtectedErrorHandlingMixin,
     DeleteView):
     template_name = 'users/delete.html'
