@@ -37,8 +37,8 @@ class UpdateTask(
 
 
 class DeleteTask(
-    LoginRequiredMixinWithFlash,
     UserChangeOwnDataMixin,
+    LoginRequiredMixinWithFlash,
     SuccessMessageMixin,
     DeleteView
 ):
