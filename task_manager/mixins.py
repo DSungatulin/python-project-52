@@ -3,6 +3,8 @@ from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import redirect
 from django.utils.translation import gettext as _
+from django.contrib.auth import get_user_model
+from task_manager.task.models import Task
 
 
 class LoginRequiredMixinWithFlash(LoginRequiredMixin):
@@ -42,6 +44,7 @@ class LogoutMessageMixin:
 
 
 class UserChangeOwnDataMixin(UserPassesTestMixin):
+    object_attr = 'id'
 
     def test_func(self):
         obj = self.get_object()
@@ -58,9 +61,19 @@ class UserChangeOwnDataMixin(UserPassesTestMixin):
         return True
 
     def handle_no_permission(self):
-        messages.add_message(
-            self.request,
-            messages.ERROR,
-            _('You do not have permission to change another user')
-        )
-        return redirect('users')
+        if self.model == get_user_model():
+            messages.add_message(
+                self.request,
+                messages.ERROR,
+                _('You do not have permission to delete another user')
+            )
+            return redirect('users')
+        elif self.model == Task:
+            messages.add_message(
+                self.request,
+                messages.ERROR,
+                _('You do not have permission to delete another task')
+            )
+            return redirect('tasks')
+        else:
+            raise NotImplementedError

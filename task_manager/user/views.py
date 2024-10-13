@@ -33,7 +33,8 @@ class DeleteUser(
     LoginRequiredMixinWithFlash,
     SuccessMessageMixin,
     ProtectedErrorHandlingMixin,
-    DeleteView):
+    DeleteView
+):
     template_name = 'users/delete.html'
     model = get_user_model()
     success_url = reverse_lazy('users')
