@@ -48,7 +48,6 @@ class DeleteTask(
     success_message = _('Task deleted successfully')
 
     object_attr = 'author_id'
-    permission_error_message = _('Only its author can delete a task')
 
 
 class TaskListView(LoginRequiredMixinWithFlash, FilterView):

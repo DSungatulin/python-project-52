@@ -67,6 +67,6 @@ class UserChangeOwnDataMixin(UserPassesTestMixin):
         messages.add_message(
             self.request,
             messages.ERROR,
-            _('You do not have permission to change another user')if redirect_url == 'users'else _('You do not have permission to delete this task')
+            _('You do not have permission to change another user')if redirect_url == 'users'else _('Only its author can delete a task')
         )
         return redirect(redirect_url)
