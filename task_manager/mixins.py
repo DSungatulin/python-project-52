@@ -12,7 +12,7 @@ class LoginRequiredMixinWithFlash(LoginRequiredMixin):
             messages.ERROR,
             _('You are not authorized! Please log in')
         )
-        return redirect('login')
+        return redirect('users')
 
 
 class ProtectedErrorHandlingMixin:
