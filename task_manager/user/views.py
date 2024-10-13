@@ -18,7 +18,6 @@ class CreateUser(SuccessMessageMixin, CreateView):
 class UpdateUser(
     LoginRequiredMixinWithFlash,
     UserChangeOwnDataMixin,
-    SuccessMessageMixin,
     UpdateView
 ):
     model = get_user_model()
@@ -32,9 +31,7 @@ class DeleteUser(
     LoginRequiredMixinWithFlash,
     UserChangeOwnDataMixin,
     ProtectedErrorHandlingMixin,
-    SuccessMessageMixin,
-    DeleteView
-):
+    DeleteView):
     template_name = 'users/delete.html'
     model = get_user_model()
     success_url = reverse_lazy('users')
