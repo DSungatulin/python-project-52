@@ -12,7 +12,7 @@ class LoginRequiredMixinWithFlash(LoginRequiredMixin):
             messages.ERROR,
             _('You are not authorized! Please log in')
         )
-        return redirect('users')
+        return redirect('login')
 
 
 class ProtectedErrorHandlingMixin:
@@ -51,9 +51,9 @@ class UserChangeOwnDataMixin(UserPassesTestMixin):
 
         if isinstance(obj_user_attr, int):
             if obj_user_attr != getattr(user, 'id'):
-                return False
+                return False, redirect('users')
         else:
             if getattr(obj_user_attr, 'id') != getattr(user, 'id'):
-                return False
+                return False, redirect('users')
 
         return True
