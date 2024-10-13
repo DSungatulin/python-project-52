@@ -1,4 +1,4 @@
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model, logout
 from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic import CreateView, UpdateView, DeleteView, ListView
 from django.urls import reverse_lazy
@@ -31,13 +31,19 @@ class UpdateUser(
 class DeleteUser(
     UserChangeOwnDataMixin,
     LoginRequiredMixinWithFlash,
+    SuccessMessageMixin,
     ProtectedErrorHandlingMixin,
     DeleteView
 ):
+    template_name = 'users/delete.html'
     model = get_user_model()
     success_url = reverse_lazy('users')
-    permission_error_message = _('You do not have permission to delete another user')
-    object_attr = 'id'
+    success_message = _('User deleted successfully')
+    protected_error_message = _('Cannot delete user because it is in use')
+
+    def delete(self, request, *args, **kwargs):
+        logout(request)
+        return super().delete(request, *args, **kwargs)
 
 
 class UserListView(ListView):
