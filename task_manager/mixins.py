@@ -42,7 +42,6 @@ class LogoutMessageMixin:
 
 
 class UserChangeOwnDataMixin(UserPassesTestMixin):
-    object_attr = 'id'
 
     def test_func(self):
         obj = self.get_object()
