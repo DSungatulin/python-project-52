@@ -42,12 +42,12 @@ class DeleteTask(
     SuccessMessageMixin,
     DeleteView
 ):
+    object_attr = 'author'
     template_name = 'tasks/delete.html'
     model = Task
     success_url = reverse_lazy('tasks')
     success_message = _('Task deleted successfully')
 
-    object_attr = 'author'
     permission_error_message = _('Only its author can delete a task')
 
 
