@@ -62,6 +62,6 @@ class UserChangeOwnDataMixin(UserPassesTestMixin):
         messages.add_message(
             self.request,
             messages.ERROR,
-            _('You do not have permission to change another user')
+            self.permission_error_message
         )
-        return redirect('users')
+        return redirect(self.success_url)

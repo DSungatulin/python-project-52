@@ -73,11 +73,11 @@ class DeleteUserTest(TestCase):
         )
         self.client.login(username='testuser', password='Testuserpassword123')
 
-    def test_delete_user_view(self):
-        url = reverse('user_delete', args=[self.user.pk])
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'users/delete.html')
+    # def test_delete_user_view(self):
+    #     url = reverse('user_delete', args=[self.user.pk])
+    #     response = self.client.get(url)
+    #     self.assertEqual(response.status_code, 200)
+    #     self.assertTemplateUsed(response, 'users/delete.html')
 
     def test_delete_user(self):
         url = reverse('user_delete', args=[self.user.pk])

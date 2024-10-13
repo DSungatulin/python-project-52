@@ -3,7 +3,7 @@ from django.views.generic import CreateView, UpdateView, DeleteView, DetailView
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 from django_filters.views import FilterView
-from task_manager.mixins import LoginRequiredMixinWithFlash, UserChangeOwnDataMixin
+from task_manager.mixins import LoginRequiredMixinWithFlash, UserChangeOwnDataMixin, ProtectedErrorHandlingMixin
 from .filters import TaskFilter
 from .models import Task
 from .forms import TaskCreationForm
@@ -37,18 +37,15 @@ class UpdateTask(
 
 
 class DeleteTask(
+    ProtectedErrorHandlingMixin,
     UserChangeOwnDataMixin,
-    LoginRequiredMixinWithFlash,
-    SuccessMessageMixin,
     DeleteView
 ):
-    template_name = 'tasks/delete.html'
     model = Task
+    template_name = 'tasks/delete.html'
     success_url = reverse_lazy('tasks')
-    success_message = _('Task deleted successfully')
-
+    permission_error_message = _('You do not have permission to delete another task')
     object_attr = 'author'
-    permission_error_message = _('Only its author can delete a task')
 
 
 class TaskListView(LoginRequiredMixinWithFlash, FilterView):
