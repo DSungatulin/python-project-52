@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import redirect
 from django.utils.translation import gettext as _
+from django.contrib.auth import get_user_model
 
 
 class LoginRequiredMixinWithFlash(LoginRequiredMixin):
@@ -59,9 +60,13 @@ class UserChangeOwnDataMixin(UserPassesTestMixin):
         return True
 
     def handle_no_permission(self):
+        if hasattr(self, 'model') and self.model == get_user_model():
+            redirect_url = 'users'
+        else:
+            redirect_url = 'tasks'
         messages.add_message(
             self.request,
             messages.ERROR,
-            _('You do not have permission to change another user')
+            _('You do not have permission to change another user')if redirect_url == 'users'else _('You do not have permission to delete this task')
         )
-        return redirect('users')
+        return redirect(redirect_url)
