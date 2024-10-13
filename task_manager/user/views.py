@@ -26,12 +26,15 @@ class UpdateUser(
     template_name = 'users/update.html'
     success_url = reverse_lazy('users')
     success_message = _('User successfully updated')
-    permission_error_message = _(
-        'You do not have permission to change another user'
-    )
 
 
-class DeleteUser(LoginRequiredMixinWithFlash, UserChangeOwnDataMixin, ProtectedErrorHandlingMixin, DeleteView):
+class DeleteUser(
+    LoginRequiredMixinWithFlash,
+    UserChangeOwnDataMixin,
+    ProtectedErrorHandlingMixin,
+    SuccessMessageMixin,
+    DeleteView
+):
     template_name = 'users/delete.html'
     model = get_user_model()
     success_url = reverse_lazy('users')
