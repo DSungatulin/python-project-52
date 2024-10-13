@@ -29,8 +29,8 @@ class UpdateUser(
 
 
 class DeleteUser(
-    LoginRequiredMixinWithFlash,
     UserChangeOwnDataMixin,
+    LoginRequiredMixinWithFlash,
     SuccessMessageMixin,
     ProtectedErrorHandlingMixin,
     DeleteView):
