@@ -51,9 +51,9 @@ class UserChangeOwnDataMixin(UserPassesTestMixin):
 
         if isinstance(obj_user_attr, int):
             if obj_user_attr != getattr(user, 'id'):
-                return False, redirect('users')
+                return False
         else:
             if getattr(obj_user_attr, 'id') != getattr(user, 'id'):
-                return False, redirect('users')
+                return False
 
-        return True
+        return True, redirect('users')
