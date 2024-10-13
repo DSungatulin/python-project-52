@@ -6,6 +6,8 @@ from django.utils.translation import gettext_lazy as _
 from task_manager.mixins import LoginRequiredMixinWithFlash, \
     UserChangeOwnDataMixin, ProtectedErrorHandlingMixin
 from .forms import CustomUserCreationForm, CustomUserChangeForm
+from django.contrib import messages
+from django.shortcuts import redirect
 
 
 class CreateUser(SuccessMessageMixin, CreateView):
@@ -31,21 +33,24 @@ class UpdateUser(
     )
 
 
-class DeleteUser(
-    LoginRequiredMixinWithFlash,
-    UserChangeOwnDataMixin,
-    ProtectedErrorHandlingMixin,
-    SuccessMessageMixin,
-    DeleteView
-):
+class DeleteUser(LoginRequiredMixinWithFlash,
+                 UserChangeOwnDataMixin,
+                 ProtectedErrorHandlingMixin,
+                 DeleteView):
     template_name = 'users/delete.html'
     model = get_user_model()
     success_url = reverse_lazy('users')
     success_message = _('User deleted successfully')
-    permission_error_message = _(
-        'You do not have permission to change another user'
-    )
     protected_error_message = _('Cannot delete user because it is in use')
+    permission_error_message = _('You do not have permission to delete another user')
+
+    def handle_no_permission(self):
+        messages.add_message(
+            self.request,
+            messages.ERROR,
+            self.permission_error_message
+        )
+        return redirect('users')
 
     def delete(self, request, *args, **kwargs):
         logout(request)
