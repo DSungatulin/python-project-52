@@ -1,4 +1,4 @@
-from django.contrib.auth import get_user_model, logout
+from django.contrib.auth import get_user_model
 from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic import CreateView, UpdateView, DeleteView, ListView
 from django.urls import reverse_lazy
@@ -42,7 +42,6 @@ class DeleteUser(
     protected_error_message = _('Cannot delete user because it is in use')
 
     def delete(self, request, *args, **kwargs):
-        logout(request)
         return super().delete(request, *args, **kwargs)
 
 
