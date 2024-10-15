@@ -53,12 +53,6 @@ class CustomUserChangeForm(UserCreationForm):
             raise forms.ValidationError('Username already exists.')
         return username
 
-    def save(self, commit=True):
-        user = super().save(commit=False)
-        if commit:
-            user.save()
-        return user
-
 
 class CustomAuthenticationForm(AuthenticationForm):
     username = forms.CharField(
