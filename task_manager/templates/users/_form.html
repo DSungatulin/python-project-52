@@ -1,0 +1,7 @@
+<form action="{{ action_url }}" method="post" class="form">
+    {% csrf_token %}
+
+    {% bootstrap_form form %}
+
+    <input class="btn btn-primary" type="submit" value="{{ submit_text }}">
+</form>
