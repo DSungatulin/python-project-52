@@ -39,6 +39,11 @@ class UpdateUserTest(TestCase):
         )
         self.client.login(username='testuser', password='Testuserpassword123')
 
+    def test_update_user_view(self):
+        url = reverse('user_update', args=[self.user.pk])
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'users/update.html')
 
     def test_update_user(self):
         url = reverse('user_update', args=[self.user.pk])
