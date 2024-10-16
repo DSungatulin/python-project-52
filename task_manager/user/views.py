@@ -4,7 +4,7 @@ from django.views.generic import CreateView, UpdateView, DeleteView, ListView
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 from task_manager.mixins import LoginRequiredMixinWithFlash, \
-    UserChangeOwnDataMixin, ProtectedErrorHandlingMixin
+    UserChangeOwnDataMixin, ProtectedCheckMixin
 from .forms import CustomUserCreationForm, CustomUserChangeForm
 
 
@@ -32,7 +32,7 @@ class DeleteUser(
     UserChangeOwnDataMixin,
     LoginRequiredMixinWithFlash,
     SuccessMessageMixin,
-    ProtectedErrorHandlingMixin,
+    ProtectedCheckMixin,
     DeleteView
 ):
     template_name = 'users/delete.html'
