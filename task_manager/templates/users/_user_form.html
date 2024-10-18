@@ -1,0 +1,7 @@
+{% load django_bootstrap5 %}
+
+<form action="{% url form_action pk=object.pk %}" method="post" class="form">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    <input class="btn btn-primary" type="submit" value="{{ button_text }}">
+</form>

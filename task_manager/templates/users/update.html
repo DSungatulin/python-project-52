@@ -8,12 +8,6 @@
 
 <h1 class="my-4">{% trans "Update User" %}</h1>
 
-<form action="{% url 'user_update' pk=user.pk %}" method="post" class="form">
-    {% csrf_token %}
+{% include "users/_user_form.html" with form_action="user_update" object=user form=form button_text=update_text %}
 
-    {% bootstrap_form form %}
-
-    <input class="btn btn-primary" type="submit" value="{{ update_text }}">
-    
-</form>
 {% endblock %}
