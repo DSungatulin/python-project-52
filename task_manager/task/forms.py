@@ -11,7 +11,6 @@ class TaskCreationForm(forms.ModelForm):
             'description',
             'status',
             'executor',
-            'labels',
         ]
         labels = {
             'name': _('Name'),

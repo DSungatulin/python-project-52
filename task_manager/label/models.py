@@ -9,7 +9,11 @@ class Label(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ['id']
+        pass
+
+    @property
+    def task_labels(self):
+        return self.tasklabel_set.all()
 
     def __str__(self):
         return self.name

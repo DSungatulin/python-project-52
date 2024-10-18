@@ -5,6 +5,11 @@ from task_manager.user.models import User
 from task_manager.label.models import Label
 
 
+class TaskLabel(models.Model):
+    task = models.ForeignKey('Task', on_delete=models.CASCADE)
+    label = models.ForeignKey(Label, on_delete=models.PROTECT)
+
+
 class Task(models.Model):
     name = models.CharField(max_length=40, unique=True)
     description = models.TextField(blank=True, null=True)
@@ -21,11 +26,6 @@ class Task(models.Model):
         null=True,
         blank=True,
         related_name='assigned_tasks',
-    )
-    labels = models.ManyToManyField(
-        Label,
-        blank=True,
-        related_name='task_labels'
     )
     author = models.ForeignKey(
         User,
