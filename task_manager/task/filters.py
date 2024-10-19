@@ -35,6 +35,7 @@ class TaskFilter(django_filters.FilterSet):
         fields = {
             'status': ['exact'],
             'executor': ['exact'],
+            'labels': ['exact'],
         }
 
     def filter_self_tasks(self, queryset, name, value):

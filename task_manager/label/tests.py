@@ -65,9 +65,9 @@ class LabelTests(TestCase):
         self.assertRedirects(response, reverse('labels'))
         self.assertFalse(Label.objects.filter(name='Test Label').exists())
 
-    # def test_label_list_view(self):
-    #     url = reverse('labels')
-    #     response = self.client.get(url)
-    #     self.assertEqual(response.status_code, 200)
-    #     self.assertTemplateUsed(response, 'labels/index.html')
-    #     self.assertContains(response, 'Test Label')
+    def test_label_list_view(self):
+        url = reverse('labels')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'labels/index.html')
+        self.assertContains(response, 'Test Label')
