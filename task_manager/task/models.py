@@ -24,7 +24,6 @@ class Task(models.Model):
         verbose_name=_('Executor'))
     labels = models.ManyToManyField(
         Label,
-        through='TaskLabel',
         related_name='task_labels',
         blank=True,
         verbose_name=_('Labels'))
@@ -42,11 +41,3 @@ class Task(models.Model):
 
     def __str__(self):
         return self.name
-
-
-class TaskLabel(models.Model):
-    task = models.ForeignKey(Task, on_delete=models.CASCADE)
-    label = models.ForeignKey(Label, on_delete=models.PROTECT)
-
-    class Meta:
-        unique_together = ('task', 'label')
